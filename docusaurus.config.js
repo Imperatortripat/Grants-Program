@@ -86,7 +86,7 @@ module.exports = {
             },
             {
               label: 'Privacy Policy',
-              href: './Support%20Docs/privacy_policy',
+              to: '/Support%20Docs/privacy_policy',
             },
           ],
         }, 
