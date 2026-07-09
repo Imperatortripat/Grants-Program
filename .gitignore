@@ -66,3 +66,6 @@ node_modules
 # docusaurus
 build/
 .docusaurus/
+
+# test coverage
+coverage/
