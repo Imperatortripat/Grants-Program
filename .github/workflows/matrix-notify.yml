@@ -1,0 +1,24 @@
+name: Matrix notification
+
+# Reusable workflow that sends a message to the Web3 Foundation Matrix channel.
+# Shared by application_approved.yml and ready_for_review.yml to avoid
+# duplicating the homeserver/token/channel configuration.
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        description: 'The message to send to the Matrix channel.'
+        required: true
+        type: string
+
+jobs:
+  send_matrix_msg:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: fadenb/matrix-chat-message@v0.0.6
+        with:
+          homeserver: 'matrix.web3.foundation'
+          token: ${{ secrets.MATRIX_TOKEN }}
+          channel: ${{ secrets.MATRIX_CHANNEL_ID }}
+          message: ${{ inputs.message }}
