@@ -1,0 +1,23 @@
+name: Comment on PR
+
+# Reusable workflow that leaves a comment on the triggering pull request.
+# Shared by label_comment.yml and application_accepted.yml to avoid
+# duplicating the comment action configuration.
+
+on:
+  workflow_call:
+    inputs:
+      message:
+        description: 'The comment body to post on the pull request.'
+        required: true
+        type: string
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Comment PR
+        uses: thollander/actions-comment-pull-request@1.0.2
+        with:
+          message: ${{ inputs.message }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

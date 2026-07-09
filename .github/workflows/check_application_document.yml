@@ -8,17 +8,7 @@ on:
 jobs:
   get_filename:
     if: contains(github.event.pull_request.body, 'Project Abstract')
-    runs-on: ubuntu-latest
-    outputs:
-      filename: ${{ steps.files.outputs.added }}
-    steps:
-
-      - name: Get application filename # We assume there's only one
-        id: 'files'
-        uses: Ana06/get-changed-files@v2.0.0
-        with:
-          filter: 'applications/*.md'
-          format: 'csv'
+    uses: ./.github/workflows/get-application-filename.yml
 
   parse_document:
     needs: get_filename

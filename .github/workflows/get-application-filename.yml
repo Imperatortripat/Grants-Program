@@ -1,0 +1,36 @@
+name: Get application filename
+
+# Reusable workflow that returns the changed application file in the PR.
+# Shared by application_accepted.yml and check_application_document.yml to
+# avoid duplicating the get-changed-files configuration.
+
+on:
+  workflow_call:
+    inputs:
+      filter:
+        description: 'Glob used to filter changed files.'
+        required: false
+        type: string
+        default: 'applications/*.md'
+      format:
+        description: 'Output format for the list of changed files.'
+        required: false
+        type: string
+        default: 'csv'
+    outputs:
+      filename:
+        description: 'Comma-separated list of added application files.'
+        value: ${{ jobs.get_filename.outputs.filename }}
+
+jobs:
+  get_filename:
+    runs-on: ubuntu-latest
+    outputs:
+      filename: ${{ steps.files.outputs.added }}
+    steps:
+      - name: Get application filename # We assume there's only one
+        id: 'files'
+        uses: Ana06/get-changed-files@v2.0.0
+        with:
+          filter: ${{ inputs.filter }}
+          format: ${{ inputs.format }}
