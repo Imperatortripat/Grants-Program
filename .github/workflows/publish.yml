@@ -5,16 +5,13 @@ on:
     branches:
       - master
 
-permissions:
-  contents: read
-
 jobs:
   build:
     if:  github.repository_owner == 'w3f'
     name: build and deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@61b9e3751b92087fd0b06925ba6dd6314e06f089 # master
+      - uses: actions/checkout@master
       - uses: actions/setup-node@v2
         with:
           node-version: "16.16.0"

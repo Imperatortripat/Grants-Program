@@ -3,10 +3,6 @@ on:
   pull_request_target:
     types: [closed]
 
-permissions:
-  contents: read
-  pull-requests: write
-
 jobs:
   get_filename:
     if: github.event.pull_request.merged == true
